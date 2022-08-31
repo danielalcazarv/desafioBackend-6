@@ -5,6 +5,7 @@ const {Server : HttpServer} = require ('http');
 const {Server : IOServer} = require ('socket.io');
 const Contenedor = require('./src/contenedor.js');
 const productos = new Contenedor('./src/productos.json');
+const historial = new Contenedor('./src/historial.json')
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
 
@@ -41,14 +42,25 @@ const server = httpServer.listen(PORT, ()=>{
 })
 
 /******Web Socket******/
+//Productos
 io.on('connection', async (socket)=>{
     console.log('Usuario Conectado');
     const prods = await productos.getAll();
     
-    socket.emit('productos', prods)
-    
+    socket.emit('productos', prods);
     socket.on('new-prod', data =>{
         productos.save(data);
         io.sockets.emit('productos',prods);
     });
 });
+
+//Chat
+io.on('connection', async (socket)=>{
+    const chat = await historial.getAll();
+    
+    socket.emit('mensajes',chat);
+    socket.on('new-mensaje', data =>{
+        historial.save(data);
+        io.sockets.emit('mensajes', chat);
+    });
+})
