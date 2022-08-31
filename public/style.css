@@ -8,6 +8,10 @@
     max-width: 700px;
 }
 
+.img-thumbnail{
+    max-width: 60px;
+}
+
 .chat-box{
     min-height: 350px;
     max-height: 350px;

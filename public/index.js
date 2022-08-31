@@ -9,7 +9,7 @@ function renderProductos(data){
         <td scope="row">${producto.titulo}</td>
         <td>$ ${producto.precio}</td>
         <td>
-            <img src=${producto.url} class="img-thumbnail" style="max-width: 60px ;" alt="Foto de ${producto.titulo}">
+            <img src=${producto.url} class="img-thumbnail" alt="Foto de ${producto.titulo}">
         </td>
         </tr>`);
     }).join('');
@@ -67,9 +67,7 @@ function addMsg(e){
         time : timestamp,
         mensaje: msjInput.value,
     };
-
     socket.emit('new-mensaje', mensaje);
-
     msjInput.value='';
     return false;
 }

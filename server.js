@@ -36,7 +36,7 @@ app.get('/', (req,res)=>{
 });
 
 /******Servidor******/
-const PORT = 3000;
+const PORT = 8080;
 const server = httpServer.listen(PORT, ()=>{
     console.log('Tu servidor esta corriendo en el puerto http://localhost:' + PORT);
 })
